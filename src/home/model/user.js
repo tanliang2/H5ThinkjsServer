@@ -18,6 +18,7 @@ export default class extends think.model.mongo {
     async addUser(username, pwd) {
         let usercountModel = think.model('usercount', think.config('db'), 'home');
         var userCount = await usercountModel.getUserCount();
+        console.log("addUser,userCount:"+userCount);
         var insertId = await this.add({
             uname: username,
             password: pwd,
@@ -132,7 +133,7 @@ export default class extends think.model.mongo {
         if(userdata.userData.recordData.recordList["1"].length > 50)
         {
             await this.where({ "userData.uid": Number(udata.uid) }).update({
-                $pop: { "userData.recordData.recordList.1": -1 } 
+                $pop: { "userData.recordData.recordList.1": -1 }
             });
         }
     }
